@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nutriplus-535c4": {
+      "hosting": {
+        "angular-projet-nutrition": [
+          "nutriplus-535c4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nutriplus-535c4"
+  }
+}

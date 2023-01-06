@@ -1,0 +1,61 @@
+<main class="menu-recipe">
+    <section class="banner">
+        <h1>Recipes</h1>
+    </section>
+    <button class="filter-button" (click)="displayFilter()"><mat-icon>sort</mat-icon></button>
+    <section class="search_container" *ngIf="isFilterOpen">
+        <h2>Filter</h2>
+        <div>
+            <label for="search">Show me recipes with</label>
+            <input (keyup)="searchIngredient($event,true)" type="text" placeholder="Search for ingredient">
+            <div class="ingredient" *ngIf="isMenuOpen" #searchInput>
+                <option *ngFor="let ingredient of ingredients" [value]="ingredient.name"
+                    (click)="addIngredient($event)">{{ingredient.name}}</option>
+            </div>
+            <div class="tagSort">
+                <div *ngFor="let ingredient of ingredientsSelected" class="tag">
+                    <p>{{ingredient}}</p>
+                    <button (click)="removeFromAddIngredients($event)">
+                        <mat-icon
+                            class="icon-close">cancel</mat-icon></button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="search">Show me recipes without</label>
+            <input (keyup)="searchIngredient($event,false)" type="text" placeholder="Search for ingredient">
+            <div class="ingredient" *ngIf="isMenuOpen" #searchInput>
+                <option *ngFor="let ingredient of searchSuggestionsIngredientsRemove" [value]="ingredient.name"
+                    (click)="addRemoveIngredient($event)">{{ingredient.name}}</option>
+            </div>
+        </div>
+        <div class="tagSort">
+            <div *ngFor="let ingredient of ingredientsSelectedRemove" class="tag">
+                <p>{{ingredient}}</p>
+                <button (click)="removeFromRemoveIngredients($event)"><mat-icon
+                        class="icon-close">cancel</mat-icon></button>
+            </div>
+        </div>
+        <div class="sortby">
+            <select name="sortBy" id="" (click)="sortBy($event)">
+                <option *ngFor="let sort of ArrayOfSortBy" [value]="sort">{{sort}}</option>
+            </select>
+
+            <input type="radio" name="sense" id="">
+            <label for="sense">Low to High</label>
+            <input type="radio" name="sense" id="">
+            <label for="sense">High to Low</label>
+        </div>
+    </section>
+    <section class="recipes_container">
+        <app-card-menu-recipe *ngFor="let recipe of recipes.results" [recipe]="recipe"
+            class="recipe_container"></app-card-menu-recipe>
+    </section>
+    <section class="pagination">
+        <button *ngIf="this.offset != 0"  (click)="firstPage()"><mat-icon>first_page</mat-icon></button>
+        <button *ngIf="this.offset != 0" (click)="previousPage()"><mat-icon>navigate_before</mat-icon></button>
+        <p>{{this.getActivePage()}}</p>
+        <button  *ngIf="this.offset*10 == this.recipes.totalResults" (click)="nextPage()"><mat-icon>navigate_next</mat-icon></button>
+        <button *ngIf="this.offset*10 == this.recipes.totalResults"(click)="lastPage()"><mat-icon>last_page</mat-icon></button>
+    </section>
+</main>

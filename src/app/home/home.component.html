@@ -1,0 +1,15 @@
+<main class="home">
+    <section class="banner">
+        <h1>NutriPlus</h1>
+        <p>Find the best recipes for your diet</p>
+    </section>
+    <section class="container">
+        <div class="recipes_container">
+            <h2><a routerLink="/menu-recipes">Discover recipes <i class="material-icons">arrow_right_alt</i></a></h2>
+            <div *ngFor="let recipe of recipes" class="recipe">
+                    <img [src]="recipe.image" alt="recipe image">
+                    <a routerLink="/recipe/{{recipe.id}}">{{recipe.title}}</a>
+            </div>
+        </div>
+    </section>
+</main>

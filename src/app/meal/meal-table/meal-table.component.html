@@ -1,0 +1,37 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col" class="border-radius-left">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            <th scope="col">Saturday</th>
+            <th scope="col border-radius-right">Sunday</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th class="title_vertical border-radius-left">Morning</th>
+            <td *ngFor="let recipeMorning of dayOfWeek " class="case" >
+                <app-meal-day [day]="meal.week[recipeMorning].meals[0]" class="app-meal-day"></app-meal-day>
+            </td>
+        </tr>
+        <tr>
+            <th class="title_vertical">Afternoon</th>
+            <td *ngFor="let recipeAfternoon of dayOfWeek " class="case" >
+                <app-meal-day [day]="meal.week[recipeAfternoon].meals[1]"></app-meal-day>
+            </td>
+        </tr>
+        <tr>
+            <th class="title_vertical border-radius-right">Evening</th>
+            <td *ngFor="let recipeEvening of dayOfWeek " class="case" >
+                <app-meal-day [day]="meal.week[recipeEvening].meals[2]"></app-meal-day>
+            </td>
+        </tr>
+
+    </tbody>
+
+
+</table>

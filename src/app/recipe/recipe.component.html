@@ -1,0 +1,55 @@
+<main class="main">
+    <section class="container">
+        <h2 class="title">{{recipe.title}}</h2>
+        <section>
+            <img src="{{recipe.image}}" alt="{{recipe.title}}" class="img">
+            <div class="allNutrient">
+                <div *ngFor="let nutrient of essentialNutrients" class="nutrient">
+                    {{nutrient.amount}}{{nutrient.unit}} {{nutrient.name}}
+                </div>
+            </div>
+        </section>
+        <section class="info">
+            <div class="info-item">
+                <img src="../../assets/img/Clock_circular_outline.png">
+                <p>{{recipe.readyInMinutes}} minute</p>
+            </div>
+            <div class="info-item">
+                <img src="../../assets/img/Serving_dish.png">
+                <p>{{recipe.servings}} people</p>
+            </div>
+            <div class="info-item">
+                <img src="../../assets/img/Dollar.png">
+                <p>${{recipe.pricePerServing}} /serving </p>
+            </div>
+        </section>
+    </section>
+    <section class="container">
+        <h3 class="title underline">Ingredients</h3>
+        <ul class="list">
+            <li *ngFor="let ingredient of recipe.extendedIngredients">
+                {{ingredient.originalName}}
+                <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}" alt="{{ingredient.originalName}}">
+                {{ingredient.amount}} {{ingredient.unit}}
+            </li>
+        </ul>
+    </section>
+    <section class="container">
+        <h3 class="title underline">Equipement</h3>
+        <ul class="list">
+            <li *ngFor="let equipment of equipments.equipment">
+                {{equipment.name}}
+                <img src="https://spoonacular.com/cdn/equipment_100x100/{{equipment.image}}" alt="{{equipment.name}}">
+            </li>
+        </ul>
+    </section>
+    <section class="container">
+        <h3 class="title underline">Instructions</h3>
+        <ol class="list-instruction">
+            <li *ngFor="let step of recipe.analyzedInstructions[0].steps">
+               <div class="list-number">{{step.number}}</div>
+               <div class="list-instruction">{{step.step}}</div>
+            </li>
+        </ol>
+    </section>
+</main>

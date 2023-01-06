@@ -1,0 +1,15 @@
+<nav id="my-first">
+    <ul>
+        <li class="logotype">
+            <a routerLink="/">a</a>
+        </li>
+        <li class="burger" (click)="toggleMenu()">
+            <i class="material-icons">{{isMenuOpen ? "close" : "menu"}}</i>
+        </li>
+        <li class="menu" [class.open]="isMenuOpen">
+            <a class="menu-item" routerLink="/meal">My meal Plan</a>
+            <a class="menu-item" routerLink="/menu-recipes">Recipes</a>
+            <a class="menu-item" routerLink="/register">Register</a>
+            <a class="menu-item" routerLink="/login">login</a>
+    </ul>
+</nav>

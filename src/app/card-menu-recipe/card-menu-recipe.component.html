@@ -1,0 +1,26 @@
+<section>
+    <div>
+        <h2>{{recipe.title}}</h2>
+        <img [src]="recipe.image" alt="recipe image" class="image_recipe_mobile">
+        <div class="allNutrient">
+            <div *ngFor="let nutrient of essentialNutrients" class="nutrient">
+                {{nutrient.amount}}{{nutrient.unit}} {{nutrient.name}}
+            </div>
+        </div>
+        <section class="recipe_info">
+            <div>
+                <img src="../../assets/img/Clock_circular_outline.png">
+                <p>{{recipe.readyInMinutes}} minute</p>
+            </div>
+            <div>
+                <img src="../../assets/img/Serving_dish.png">
+                <p>{{recipe.servings}} people</p>
+            </div>
+            <div>
+                <img src="../../assets/img/Dollar.png">
+                <p>{{recipe.pricePerServing}} /serving</p>
+            </div>
+        </section>
+    </div>
+    <img [src]="recipe.image" alt="recipe image" class="image_recipe">
+</section>
