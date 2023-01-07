@@ -7,9 +7,10 @@
             <i class="material-icons">{{isMenuOpen ? "close" : "menu"}}</i>
         </li>
         <li class="menu" [class.open]="isMenuOpen">
-            <a class="menu-item" routerLink="/meal">My meal Plan</a>
+            <a class="menu-item" routerLink="/meal" *ngIf="isUserConnected">My meal Plan</a>
             <a class="menu-item" routerLink="/menu-recipes">Recipes</a>
-            <a class="menu-item" routerLink="/register">Register</a>
-            <a class="menu-item" routerLink="/login">login</a>
+            <a class="menu-item" routerLink="/register" *ngIf="!isUserConnected">Register</a>
+            <a class="menu-item" routerLink="/login"  *ngIf="!isUserConnected">login</a>
+            <span class="menu-item logout"  *ngIf="isUserConnected" (click)="logout()" >logout</span>
     </ul>
 </nav>

@@ -24,29 +24,44 @@
 
 .mid_page {
     display: flex;
+
     @media screen and (max-width: @breakpoint2) {
-        
         flex-direction: column;
         align-items: center;
+    }
+
+    .fixed-button {
+        right: 10px;
+        z-index: 9999;
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
+        background-color: #E6B325;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 70vh;
     }
 }
 
 .meal-Plan-container {
     background-color: #A47E3B;
-    float: left;
     margin: 20px;
     border-radius: 16px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
     color: white;
     width: 250px;
     padding: 10px;
-
-    @media screen and (max-width @breakpoint2) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    /*@media screen and (max-width: @breakpoint2) {
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-    }
+        
+    }*/
 
     h2 {
         font-size: 2.5rem;
@@ -70,6 +85,15 @@
         }
     }
 
+    .ingredient {
+        background-color: white;
+        color: black;
+        border-radius: 16px;
+        position: absolute;
+        padding: 5px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    }
+
     .sortby {
         input {
             width: fit-content;
@@ -83,11 +107,44 @@
         }
     }
 
+    .tagSort {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0.2rem 0;
 
+        .tag {
+            display: flex;
+            background-color: white;
+            border-radius: 16px;
+            width: fit-content;
+            color: black;
+            margin: 0;
+            padding: 0.2rem;
+            font-weight: 400;
+            margin-left: 5px;
+
+            p {
+                margin: auto 0;
+            }
+
+            button {
+                background-color: white;
+                border: none;
+                margin: 0 0.2rem 0 0;
+                padding: 0;
+                color: black;
+                cursor: pointer;
+                display: flex;
+
+                .icon-close {
+                    transform: scale(0.8);
+                }
+            }
+
+        }
+    }
 }
 
 .table {
     width: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
 }

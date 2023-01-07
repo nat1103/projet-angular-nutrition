@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import * as config from '../../../assets/config/config';
+import * as config from '../../../../assets/config/config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MealPlanningService {
-
-  configUrl = config.config.apiUrl + '/mealplanner/generate';
+export class IngredientsService {
+  configUrl = config.config.apiUrl + '/food/ingredients';
   apiKey = config.config.apiKey
   constructor(private http: HttpClient) { }
 
@@ -24,19 +23,19 @@ export class MealPlanningService {
     return throwError(errorMessage);
   }
 
-  getMealPlanning(timeFrame: string, targetCalories: string, diet: string, exclude: string): any {
-    if (diet != '') {
-      diet = '&diet=' + diet;
-    }
-    if (exclude != '') {
-      exclude = '&exclude=' + exclude;
-    }
-    /*return this.http.get(this.configUrl + '?timeFrame=' + timeFrame + '&targetCalories=' + targetCalories + diet + exclude + '&apiKey=' + this.apiKey)
+  getIngredients(): Observable<any> {
+    return this.http.get(this.configUrl + '/ingredients?apiKey=' + this.apiKey)
       .pipe(
         retry(3),
         catchError(this.handleError)
-      );*/
-      console.log(this.configUrl + '?timeFrame=' + timeFrame + '&targetCalories=' + targetCalories + diet + exclude + '&apiKey=' + this.apiKey)
+      );
   }
 
+  autocompleteIngredientsSearch(ingredient: string , ): Observable<any> {
+    return this.http.get(this.configUrl + '/search?query=' + ingredient + '&number=5&apiKey=' + this.apiKey)
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
 }

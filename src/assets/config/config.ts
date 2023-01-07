@@ -1,6 +1,6 @@
 'use strict';
 
 export const config = {
-    apiKey: '2b0f32adc9bf4ee99980fc05e2bbf353',
+    apiKey: '17ba39bc945f4d5d8ce98ef09533ced4 ',
     apiUrl: 'https://api.spoonacular.com'
 };  

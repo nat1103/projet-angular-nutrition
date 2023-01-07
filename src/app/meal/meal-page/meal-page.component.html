@@ -2,8 +2,9 @@
     <h1>Meal Planner</h1>
 </section>
 <main class="mid_page">
-    
-    <section class="meal-Plan-container">
+    <button #buttonCreateMealPlanning class="fixed-button" (click)="display()"><mat-icon>create</mat-icon></button>
+    <section class="meal-Plan-container" *ngIf="displayFilter">
+        <mat-icon (click)="display()">close</mat-icon>
         <h2>Meals Plan</h2>
         <div>
             <label for="search">Target Calories</label>
@@ -12,10 +13,17 @@
 
         <div>
             <label for="search">Exclude ingredients</label>
-            <input type="text" placeholder="Search for ingredient">
-            <div class="ingredient" *ngIf="isMenuOpen" ngModel #searchInput>
+            <input type="text" placeholder="Search for ingredient" (keyup)="searchIngredient($event)">
+            <div class="ingredient" *ngIf="isMenuOpen" #searchInput>
                 <option *ngFor="let ingredient of searchSuggestionsIngredients" [value]="ingredient.name"
                     (click)="addRemoveIngredient($event)">{{ingredient.name}}</option>
+            </div>
+            <div class="tagSort">
+                <div *ngFor="let ingredient of removeIngredients" class="tag">
+                    <p>{{ingredient}}</p>
+                    <button (click)="removeFromIngredients($event , ingredient)">
+                        <mat-icon class="icon-close">cancel</mat-icon></button>
+                </div>
             </div>
         </div>
 
@@ -29,7 +37,6 @@
             Generate Meal Plan
         </button>
     </section>
-    <section class="table">
-        <app-meal-table [meal]="meal"></app-meal-table>
-    </section>
+    <app-meal-table class="table" *ngIf="mealIsLoaded | async" [meal]="meal[0].week" ></app-meal-table>
+    <button (click)="saveMealPlan()" style="display: none;">Save Meal Plan</button>
 </main>

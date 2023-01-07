@@ -1,5 +1,5 @@
-    <div class ='card-recipe'>
-        <div class="img" style="background-image: url('https://webknox.com/recipeImages/639120-556x370.jpg');"></div>
-        <div class='title'>{{day.title}}</div>
-    </div>
+    <section class ='container-day'>
+        <h2>{{day}}</h2>
+        <app-repas-details-meal *ngFor="let repas of mealOfDay.meals" [repas]="repas"></app-repas-details-meal>
+    </section>
     

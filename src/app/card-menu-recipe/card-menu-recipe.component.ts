@@ -1,5 +1,5 @@
 import { Component, Input ,OnInit} from '@angular/core';
-import { RecipesService } from '../shared/services/recipes.service';
+import { RecipesService } from '../shared/services/recipeService/recipes.service';
 @Component({
   selector: 'app-card-menu-recipe',
   templateUrl: './card-menu-recipe.component.html',

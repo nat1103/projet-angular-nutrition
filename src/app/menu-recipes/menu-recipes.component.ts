@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecipesService } from '../shared/services/recipes.service';
-import { IngredientsService } from '../shared/services/ingredients.service';
+import { RecipesService } from '../shared/services/recipeService/recipes.service';
+import { IngredientsService } from '../shared/services/serviceIngredient/ingredients.service';
 import { HttpClient } from '@angular/common/http';
 import { HostListener } from '@angular/core';
 
@@ -22,10 +22,11 @@ export class MenuRecipesComponent implements OnInit {
   ingredientsSelected: any = [];
   ingredientsSelectedRemove: any = [];
   isMenuOpen = false;
-  isFilterOpen = true;
+  isFilterOpen = false;
   innerWidth: any = 0;
   @ViewChild('searchInput') searchInput: ElementRef | any;
   @HostListener('window:resize', ['$event'])
+  @ViewChild('buttonFilter') buttonFilter: ElementRef | any;
   
   
   onResize(event : any) {
@@ -36,7 +37,13 @@ export class MenuRecipesComponent implements OnInit {
   }
 
   constructor(private ingredientsService: IngredientsService, private route: ActivatedRoute, private recipesService: RecipesService, private http: HttpClient, private renderer: Renderer2,) {
-
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (this.searchInput != undefined) {
+        if (e.target != this.searchInput.nativeElement) {
+          this.isMenuOpen = false;
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -48,15 +55,13 @@ export class MenuRecipesComponent implements OnInit {
       this.ingredientsSelectedRemove = JSON.parse(localStorage.getItem('removeIngredients') || '');
     }
 
-    /*this.recipesService.getRecipesFromFilter('').subscribe(data => {
+    this.recipesService.getRecipesFromFilter('').subscribe(data => {
       this.recipes = data;
-    });*/
+      
+    });
 
-
-    this.http.get('../../assets/object/10Object.json').subscribe(data => {
-      this.recipes = data;
-    }
-    );
+    console.log(this.offset);
+    console.log(this.recipes)
 
   }
 
@@ -111,7 +116,6 @@ export class MenuRecipesComponent implements OnInit {
   removeFromRemoveIngredients(event: any) {
     if (localStorage.getItem('removeIngredients') != null) {
       this.ingredientsSelectedRemove = JSON.parse(localStorage.getItem('removeIngredients') || '');
-      console.log('loc ' + localStorage.getItem('removeIngredients'));
       this.ingredientsSelectedRemove.splice(event.target.value, 1);
       localStorage.setItem('removeIngredients', JSON.stringify(this.ingredientsSelectedRemove));
       this.requestToAddOrRemoveIngredient();
@@ -146,6 +150,7 @@ export class MenuRecipesComponent implements OnInit {
       this.requestStringForApi = '&' + requestToRemoveIngredient
     }
 
+    this.getRecipes();
 
   }
 
@@ -192,7 +197,6 @@ export class MenuRecipesComponent implements OnInit {
   }
 
   getRecipes() {
-    this.requestToAddOrRemoveIngredient();
     this.recipesService.getRecipesFromFilter(this.requestStringForApi + this.sort + '&offset=' + this.offset).subscribe(data => {
       this.recipes = data;
     }
@@ -202,4 +206,18 @@ export class MenuRecipesComponent implements OnInit {
   displayFilter() {
     this.isFilterOpen = !this.isFilterOpen;
   }
+
+  ngAfterViewInit() {
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 436) {
+        this.buttonFilter.nativeElement.style.position = 'fixed';
+        this.buttonFilter.nativeElement.style.top = '80px';
+      } else if (window.scrollY < 436) {
+        this.buttonFilter.nativeElement.style.position = 'absolute';
+        this.buttonFilter.nativeElement.style.top = '70vh';
+      }
+    });
+  }
+  
 }

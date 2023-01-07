@@ -7,12 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class MealTableComponent {
   @Input() meal: any = {};
-  dayOfWeek: Array<string> = [];
+  dayOfWeek: Array<string> = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   constructor() { }
 
   ngOnInit() {
-    console.log(this.meal);
-    this.dayOfWeek = Object.keys(this.meal.week);
-    console.log(this.dayOfWeek);
+    console.log(this.meal)
   }
 }

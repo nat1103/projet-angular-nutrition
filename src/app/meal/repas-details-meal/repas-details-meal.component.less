@@ -1,0 +1,52 @@
+@breakpoint: 728px;
+
+.meal {
+    h3 {
+        margin: 5px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    h3::before {
+        content: " ";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: #61481C;
+        margin: 5px 0;
+    }
+
+    .recipe {
+        background-image: url(https://webknox.com/recipeImages/1697823-556x370.jpg);
+        background-size: cover;
+        max-width: 110px;
+        height: 100px;
+        margin: auto;
+        position: relative;
+        border-radius: 16px;
+
+        @media screen and (max-width: @breakpoint) {
+            max-width: 95%;
+            height: 200px;
+            margin: auto;
+        }
+
+        p > a {
+            text-align: center;
+            font-size: 10px;
+            background-color: rgba(230, 179, 37, 0.75);
+            position: absolute;
+            bottom: 0;
+            color: white;
+            padding: 5px 1px;
+            font-weight: 400;
+            width: 100%;
+            border-radius: 0px 0px 16px 16px;
+            text-decoration: none;
+            @media screen and (max-width: @breakpoint) {
+                font-size: 18px;
+            }
+        }
+    }
+}

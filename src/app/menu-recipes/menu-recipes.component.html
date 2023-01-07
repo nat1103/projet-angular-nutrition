@@ -2,7 +2,7 @@
     <section class="banner">
         <h1>Recipes</h1>
     </section>
-    <button class="filter-button" (click)="displayFilter()"><mat-icon>sort</mat-icon></button>
+    <button class="filter-button" (click)="displayFilter()" #buttonFilter><mat-icon>sort</mat-icon></button>
     <section class="search_container" *ngIf="isFilterOpen">
         <h2>Filter</h2>
         <div>
@@ -55,7 +55,7 @@
         <button *ngIf="this.offset != 0"  (click)="firstPage()"><mat-icon>first_page</mat-icon></button>
         <button *ngIf="this.offset != 0" (click)="previousPage()"><mat-icon>navigate_before</mat-icon></button>
         <p>{{this.getActivePage()}}</p>
-        <button  *ngIf="this.offset*10 == this.recipes.totalResults" (click)="nextPage()"><mat-icon>navigate_next</mat-icon></button>
-        <button *ngIf="this.offset*10 == this.recipes.totalResults"(click)="lastPage()"><mat-icon>last_page</mat-icon></button>
+        <button (click)="nextPage()"><mat-icon>navigate_next</mat-icon></button>
+        <button (click)="lastPage()"><mat-icon>last_page</mat-icon></button>
     </section>
 </main>

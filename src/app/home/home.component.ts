@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RecipesService } from '../shared/services/recipes.service';
+import { RecipesService } from '../shared/services/recipeService/recipes.service';
 
 
 @Component({
@@ -12,14 +12,8 @@ export class HomeComponent {
   constructor(private recipesService: RecipesService,) { }
 
   ngOnInit() {
-    for (let i = 0; i < 5; i++) {
-      this.recipes.push({
-        id: i,
-        title: 'Dizzy Busy and Hungry',
-        image: 'https://spoonacular.com/recipeImages/716429-556x370.jpg'
-      });
-    }
-    /*let dataRecipes: any = [];
+  
+    let dataRecipes: any = [];
     this.recipesService.getRandomRecipes().subscribe((data: []) => {
 
       dataRecipes = data;
@@ -31,7 +25,7 @@ export class HomeComponent {
           image: recipe.image,
         });
       })
-    });*/
+    });
 
   }
 }

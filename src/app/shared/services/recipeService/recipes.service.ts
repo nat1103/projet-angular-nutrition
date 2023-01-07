@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import * as config from '../../../assets/config/config';
+import * as config from '../../../../assets/config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -86,7 +86,6 @@ export class RecipesService {
 
   returnEssentialNutrients(data : any): Array<any> {
     let Essentielnutrients: Array<any> = [];
-    console.log(data);
     data.nutrition.nutrients.forEach((nutrients: { name: string; amount: string; unit: string }) => {
       if (nutrients.name == 'Calories' || nutrients.name == 'Fat' || nutrients.name == 'Carbohydrates' || nutrients.name == 'Protein') {
         switch (nutrients.name) {

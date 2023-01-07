@@ -1,5 +1,5 @@
-import { Component , Input ,OnInit } from '@angular/core';
-import { RecipesService } from '../../shared/services/recipes.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { RecipesService } from '../../shared/services/recipeService/recipes.service';
 
 @Component({
   selector: 'app-meal-day',
@@ -7,13 +7,32 @@ import { RecipesService } from '../../shared/services/recipes.service';
   styleUrls: ['./meal-day.component.less']
 })
 export class MealDayComponent implements OnInit {
-  @Input() day: any = {};
+  @Input() mealOfDay: any = {};
+  @Input() day: string = '';
   image = '';
-  constructor(private recipeService : RecipesService) { }
+  timeOfDay = ['Morning', 'Afternoon', 'Evening'];
+  constructor(private recipeService: RecipesService) { }
 
   ngOnInit() {
-     this.recipeService.getInformationRecipe(this.day.id).subscribe(data => {
-      this.image = data.image;
-    });
+    /*this.recipeService.getInformationRecipe(this.day.id).subscribe(data => {
+     this.image = data.image;
+   });*/
+    for (let i = 0; i < this.mealOfDay.meals.length; i++) {
+      switch (i) {
+        case 0:
+          this.mealOfDay.meals[i].timeOfDay = this.timeOfDay[0];
+          break;
+        case 1:
+          this.mealOfDay.meals[i].timeOfDay = this.timeOfDay[1];
+          break;
+        case 2:
+          this.mealOfDay.meals[i].timeOfDay = this.timeOfDay[2];
+          break;
+        default:
+          break;
+      }
+
+    }
+    
   }
 }
